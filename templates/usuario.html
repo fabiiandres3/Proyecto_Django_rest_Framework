@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil de Usuario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .card {
+      width: 300px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .card p {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Perfil del usuario</h1>
+
+<div class="card" id="user-card">
+  Cargando usuario...
+</div>
+
+<script>
+  fetch("/usuario/")
+    .then(res => res.json())
+    .then(user => {
+      document.getElementById("user-card").innerHTML = `
+        <p><strong>ID:</strong> ${user.id}</p>
+        <p><strong>Usuario:</strong> ${user.username}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Nombre:</strong> ${user.name}</p>
+        <p><strong>Apellido:</strong> ${user.last_name}</p>
+        <p><strong>Superusuario:</strong> ${user.is_superuser}</p>
+        <p><strong>Staff:</strong> ${user.is_staff}</p>
+        <p><strong>Activo:</strong> ${user.is_active}</p>
+      `;
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById("user-card").innerHTML =
+        "<p style='color:red'>Error cargando usuario</p>";
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
