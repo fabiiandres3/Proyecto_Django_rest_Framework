@@ -105,4 +105,4 @@ class Product(BaseModel):
         verbose_name_plural = 'Productos'
 
     def __str__(self):
-        self.name""
+        return self.name
